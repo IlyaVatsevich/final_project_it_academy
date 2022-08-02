@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: @profileActive@
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/classifier_service?currentSchema=final_project_classifier
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: postgresql
+server:
+  port: 81
+
+users:
+  service:
+    url: http://localhost:80/users
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - prod
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://db:5432/classifier_service?currentSchema=final_project_classifier
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    database: postgresql
+
+users:
+  service:
+    url: http://user-service:80/users
